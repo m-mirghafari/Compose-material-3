@@ -4,12 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Share
@@ -18,13 +16,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.sky.compose_material3.ui.theme.ComposeMaterial3Theme
-import kotlin.math.round
 import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
@@ -40,7 +36,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainPage() {
     ComposeMaterial3Theme {
-        // A surface container using the 'background' color from the theme
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
@@ -68,6 +63,7 @@ fun MainPage() {
                                 .padding(16.dp)
                         ) {
                             CardItem(
+                                imageAddress = "https://picsum.photos/seed/${Random.nextInt()}/300/200",
                                 title = "Some title",
                                 description = "Some descriptions to fill this part of view. some descriptions to fill this part of view. some descriptions to fill this part of view.",
                                 modifier = Modifier.fillMaxWidth()
@@ -86,6 +82,7 @@ fun MainPage() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CardItem(
+    imageAddress: String,
     title: String,
     description: String,
     modifier: Modifier
@@ -99,7 +96,7 @@ fun CardItem(
         )
     ) {
         Image(
-            painter = rememberAsyncImagePainter("https://picsum.photos/seed/${Random.nextInt()}/300/200"),
+            painter = rememberAsyncImagePainter(imageAddress),
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
@@ -174,14 +171,6 @@ fun CardItem(
         }
     }
 }
-
-fun getContentData() = listOf(
-    "sssss",
-    "sssss",
-    "sssss",
-    "sssss",
-    "sssss"
-)
 
 
 @Preview(showBackground = true)
